@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {reactive} from "vue";
+import {defineProps, reactive} from "vue";
 
 const props = defineProps<{
   placeholder: string;
 }>();
 
 const reactiveData = reactive({
-  content: ""
+  content: false
 });
 
 //emit un evento con il nome di "get:content"
@@ -19,9 +19,15 @@ const emitContent = () => {
 </script>
 
 <template>
-  <input type="text"
-         class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-         :placeholder="props.placeholder"
+  <label>{{props.placeholder}}</label>
+  <input id="checkbox"
+         name="checkbox"
+         type="checkbox"
          v-model="reactiveData.content"
-         @change="emitContent">
+         @change="emitContent"
+         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
 </template>
+
+<style scoped>
+
+</style>
