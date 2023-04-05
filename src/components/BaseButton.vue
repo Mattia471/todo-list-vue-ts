@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {defineProps, onBeforeUpdate, onMounted, reactive, watch} from "vue";
+import {defineProps, onMounted, reactive} from "vue";
 
-onBeforeUpdate(() => {
+onMounted(() => {
   switch (props.type.toUpperCase()) {
     case "SOLID":
-      reactiveData.class = "px-3 py-2 text-sm font-semibold text-white bg-indigo-600 shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
+      reactiveData.class = "px-3 py-2 text-sm font-semibold text-white bg-blue-500 shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
       break;
     case "OUTLINE":
       reactiveData.class = "outline px-3 py-2 text-sm font-semibold text-indigo-600 bg-white border border-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
@@ -17,10 +17,17 @@ onBeforeUpdate(() => {
       break
   }
 });
+//emit un evento con il nome di "get:content"
+const emit = defineEmits(["send:action"]);
+
+//funzione che emette l'evento "get:content" con il valore di reactiveData.content
+const emitAction = () => {
+  emit("send:action");
+}
 
 const props = defineProps<{
   type: string;
-  disabled: boolean;
+  disabled: boolean
 }>();
 const reactiveData = reactive({
   class: ""
@@ -28,7 +35,7 @@ const reactiveData = reactive({
 </script>
 
 <template>
-  <button type="button" :class="reactiveData.class" :disabled="props.disabled">
+  <button type="button" :class="reactiveData.class" @click="emitAction" :disabled="props.disabled">
     <slot name="label"></slot>
   </button>
 </template>
