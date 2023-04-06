@@ -74,9 +74,9 @@ const filterTodos = (value: any) => {
 </script>
 
 <template>
-  <div class="container mx-auto py-9 px-2 w-96 bg-white rounded-lg">
+  <div class="container mx-auto py-9 px-2 w-96 rounded-lg">
     <div class="overflow-hidden shadow sm:rounded-lg">
-      <div class="px-4 py-5 sm:px-6 bg-white bg-blue-700">
+      <div class="px-4 py-5 sm:px-6 bg-blue-700">
         <div class="text-left">
           <b class="font-semi-bold text-white">ToDo List -
             {{ getTodos().filter((todo) => !todo.completed).length }} da completare</b>
