@@ -17,10 +17,10 @@ onMounted(() => {
       break
   }
 });
-//emit un evento con il nome di "get:content"
+//definisco un evento send:action
 const emit = defineEmits(["send:action"]);
 
-//funzione che emette l'evento "get:content" con il valore di reactiveData.content
+//funzione che emette l'evento "send:action" con il valore di reactiveData.content
 const emitAction = () => {
   emit("send:action");
 }
