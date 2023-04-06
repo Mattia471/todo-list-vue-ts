@@ -75,14 +75,14 @@ const filterTodos = (value: any) => {
 
 <template>
   <div class="container mx-auto py-9 px-2 w-96 rounded-lg">
-    <div class="overflow-hidden shadow sm:rounded-lg">
+    <div class="overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6 bg-blue-700">
         <div class="text-left">
-          <b class="font-semi-bold text-white">ToDo List -
+          <b class="text-white">ToDo List -
             {{ getTodos().filter((todo) => !todo.completed).length }} da completare</b>
         </div>
       </div>
-      <div class="border-t border-4 border-indigo-600">
+      <div class=" border-4 border-blue-600">
         <div class="py-3 sm:grid sm:gap-4 sm:px-6">
           <b>Descrizione Task</b>
           <base-input placeholder="Inserisci testo.." @get:content="onChangeText"></base-input>
@@ -90,7 +90,7 @@ const filterTodos = (value: any) => {
         <div class="px-4 py-3 sm:grid mx-auto">
           <base-button :type="'solid'" :disabled="reactiveData.disabledButton" @send:action="saveTodo()">
             <template #label>
-              Inserisci ToDo
+              <b>Inserisci ToDo</b>
             </template>
           </base-button>
         </div>
@@ -113,7 +113,7 @@ const filterTodos = (value: any) => {
         </div>
         <div class="py-2 p-8" v-for="todo in reactiveData.allTodos" :key="todo.id">
           <div
-              class="cursor-pointer p-4 mx-auto rounded-xl shadow-lg flex items-center space-x-7 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-pink-500 hover:to-yellow-500">
+              class="cursor-pointer p-4 rounded-xl shadow-lg flex items-center space-x-7 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-pink-500 hover:to-yellow-500">
             <div class="grid">
               <base-check-box @get:content="onChangeCompleted(todo.id,todo.completed)"
                               v-model="reactiveData.checkStatus" :value="todo.completed"></base-check-box>
