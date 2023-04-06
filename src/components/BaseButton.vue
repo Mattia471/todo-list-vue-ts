@@ -7,7 +7,7 @@ onMounted(() => {
       reactiveData.class = "px-3 py-2 text-sm font-semibold text-white bg-blue-500 shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
       break;
     case "OUTLINE":
-      reactiveData.class = "outline px-3 py-2 text-sm font-semibold text-indigo-600 bg-white border border-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
+      reactiveData.class = "outline px-3 py-2 text-sm font-semibold text-white-600 bg-blue-500 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
       break;
     case "TEXT":
       reactiveData.class = "text px-3 py-2 text-sm font-semibold text-indigo-600 bg-white shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";

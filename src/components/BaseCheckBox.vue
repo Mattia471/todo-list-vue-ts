@@ -1,31 +1,30 @@
 <script setup lang="ts">
-import {defineProps, reactive} from "vue";
+import {defineProps, reactive, watch} from "vue";
 
 const props = defineProps<{
-  placeholder: string;
+  value: any;
 }>();
 
 const reactiveData = reactive({
-  content: false
+  checked: false
 });
 
 //emit un evento con il nome di "get:content"
 const emit = defineEmits(["get:content"]);
 
-//funzione che emette l'evento "get:content" con il valore di reactiveData.content
-const emitContent = () => {
-  emit("get:content", reactiveData.content);
-}
+//emit il valore della checkbox al cambio di stato
+watch(() => reactiveData.checked, (newValue) => {
+  emit("get:content", {value: props.value, checked: newValue});
+});
+
 </script>
 
 <template>
-  <label>{{props.placeholder}}</label>
-  <input id="checkbox"
-         name="checkbox"
-         type="checkbox"
-         v-model="reactiveData.content"
-         @change="emitContent"
-         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+  <input
+      type="checkbox"
+      :value="props.value"
+      v-model="reactiveData.checked"
+      class="h-4 w-4 rounded checked:bg-white-500 border-gray-300 text-indigo-600 focus:ring-indigo-600">
 </template>
 
 <style scoped>
