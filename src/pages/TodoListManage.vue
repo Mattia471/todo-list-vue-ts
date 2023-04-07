@@ -4,12 +4,19 @@ import BaseButton from "../components/BaseButton.vue";
 import {onMounted, reactive} from "vue";
 import BaseCheckBox from "../components/BaseCheckBox.vue";
 
+interface Todo {
+  id: number;
+  description: string;
+  completed: boolean;
+}
+
 const reactiveData = reactive({
   allTodos: [],
   newTodo: {id: 0, description: "", completed: false},
   checkFilter: [],
   checkStatus: false,
-  disabledButton: false
+  disabledButton: false,
+  taskDescription: ""
 })
 
 const TODOS_KEY = 'todosList';
@@ -43,8 +50,8 @@ const checkTodoExist = (value: string) => {
 const onChangeText = (value: string) => {
   if (!checkTodoExist(value)) {
     reactiveData.newTodo = {
-      id: reactiveData.allTodos.length > 0 ? getTodos().reduce((max: any, todo: any) => Math.max(todo.id, max), getTodos()[0].id) + 1 : 1,
-      description: value,
+      id: reactiveData.allTodos.length > 0 ? getTodos().reduce((max: any, todo: Todo) => Math.max(todo.id, max), getTodos()[0].id) + 1 : 1,
+      description: reactiveData.taskDescription,
       completed: false
     }
     reactiveData.disabledButton = false;
@@ -63,9 +70,9 @@ const onChangeCompleted = (id: number, completed: boolean) => {
 const filterTodos = (value: any) => {
   if (value.checked === true) {
     if (value.value === "completed") {
-      return reactiveData.allTodos = reactiveData.allTodos.filter((todo: any) => todo.completed);
+      return reactiveData.allTodos = reactiveData.allTodos.filter((todo: Todo) => todo.completed);
     } else if (value.value === "notCompleted") {
-      return reactiveData.allTodos = reactiveData.allTodos.filter((todo: any) => !todo.completed);
+      return reactiveData.allTodos = reactiveData.allTodos.filter((todo: Todo) => !todo.completed);
     }
   } else {
     loadTodos();
@@ -85,7 +92,8 @@ const filterTodos = (value: any) => {
       <div class=" border-4 border-blue-600">
         <div class="py-3 sm:grid sm:gap-4 sm:px-6">
           <b>Descrizione Task</b>
-          <base-input placeholder="Inserisci testo.." @get:content="onChangeText"></base-input>
+          <base-input placeholder="Inserisci testo.." v-model="reactiveData.taskDescription"
+                      @get:content="onChangeText"></base-input>
         </div>
         <div class="px-4 py-3 sm:grid mx-auto">
           <base-button :type="'solid'" :disabled="reactiveData.disabledButton" @send:action="saveTodo()">
