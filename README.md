@@ -20,11 +20,4 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 
 ----------Capture-----------
-
-
-
-
-
-
-
-![image](https://user-images.githubusercontent.com/61782989/230417641-52f09b93-fcf1-42fd-be2d-767f3d6ef116.png)
+![img.png](img.png)
