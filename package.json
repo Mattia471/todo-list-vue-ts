@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "devextreme-vue": "^22.2.6",
     "vue": "^3.2.47"
   },
   "devDependencies": {
