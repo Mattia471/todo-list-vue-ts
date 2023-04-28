@@ -4,7 +4,9 @@ import BaseButton from "../components/BaseButton.vue";
 import {onMounted, ref} from "vue";
 import BaseCheckBox from "../components/BaseCheckBox.vue";
 import BarChartComponent from "../components/data-visualization/BarChartComponent.vue";
-import {dataChartSource} from "../sources/data.js";
+import {dataChartSource, dataGridSource, dataGridColumns} from "../sources/data.js";
+import DataGridComponent from "../components/data-visualization/DataGridComponent.vue";
+
 interface Todo {
   id: number;
   description: string;
@@ -83,7 +85,8 @@ const filterTodos = (value: any) => {
   <div class="container mx-auto py-9 px-2 rounded-lg">
     <div class="grid grid-cols-6 gap-16">
       <div class="col-span-2">
-        <h1 class="text-xl text-blue-700 font-bold text-center">Data Grid</h1>
+        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Data Grid</h1>
+        <DataGridComponent :data-source="dataGridSource" :columns="dataGridColumns"/>
       </div>
       <div class="col-span-2">
         <div class="overflow-hidden sm:rounded-lg">
@@ -139,8 +142,8 @@ const filterTodos = (value: any) => {
         </div>
       </div>
       <div class="col-span-2">
-        <h1 class="text-xl text-blue-700 font-bold text-center">Chart</h1>
-        <BarChartComponent :data-source="dataChartSource"></BarChartComponent>
+        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Chart</h1>
+        <BarChartComponent :data-source="dataChartSource"/>
       </div>
     </div>
   </div>
