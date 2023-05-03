@@ -83,3 +83,11 @@ export const dataGridSource = [{
     group: 'Overview',
     action: ''
 }]
+
+export const dataSourceDoughnut = [{
+    field: 'Returning Visitor',
+    val: 26.8,
+}, {
+    field: 'New Visitor',
+    val: 73.2,
+}];
