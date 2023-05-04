@@ -145,18 +145,16 @@ const filterTodos = (value: any) => {
     </div>
     <div class="grid grid-cols-6 gap-16 p-4 border-b-4">
       <div class="col-span-3">
-        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Data Grid</h1>
+        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Language Table</h1>
         <DataGridComponent :data-source="dataGridSource" :columns="dataGridColumns"/>
       </div>
       <div class="col-span-3">
-        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Standard Bar Chart</h1>
-        <BarChartComponent :data-source="dataChartSource"/>
+        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Doughnut Chart</h1>
+        <DoughnutChartComponent :data-source="dataSourceDoughnut" title="New Visitor / Returning Visitor"/>
       </div>
     </div>
     <div class="grid grid-cols-6 gap-16 p-4">
       <div class="col-span-3">
-        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Doughnut Chart</h1>
-        <DoughnutChartComponent :data-source="dataSourceDoughnut" title="New Visitor / Returning Visitor"/>
       </div>
     </div>
     </div>

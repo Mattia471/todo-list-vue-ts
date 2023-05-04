@@ -5,8 +5,8 @@ const props = defineProps<{
   dataSource: any;
   title: string;
 }>();
-const customizeText = ( argument : any) => {
-  return `${argument.percentText}`;
+const customizeText = (argument: any) => {
+  return argument.valueText.toString().replace(/\\B(?<!\\.\\d*)(?=(\\d{3})+(?!\\d))/g, ",") + "%";
 }
 </script>
 <template>
