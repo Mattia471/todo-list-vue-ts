@@ -138,7 +138,7 @@ export default {
         let date = new Date();
         let day = date.getDate() - 3;
         let temp = '';
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 8; i++) {
             switch (type.toUpperCase()) {
                 case 'DAY':
                     temp = `${day+i} ${this.calculateMonth()}`;
@@ -165,6 +165,11 @@ export default {
     calculateMonth(monthPlus) {
         let date = new Date();
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        return months[date.getMonth() + (monthPlus ? monthPlus : 0)]
+        if(date.getMonth()+ monthPlus > 11){
+            date.setMonth(date.getMonth() + monthPlus - 12);
+            return months[date.getMonth()]
+        }else{
+            return months[date.getMonth() + (monthPlus ? monthPlus : 0)]
+        }
     }
 };

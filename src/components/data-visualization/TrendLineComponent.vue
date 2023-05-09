@@ -4,7 +4,6 @@ import {defineProps} from "vue";
 const props = defineProps<{
   dataSource: any;
   seriesValue: any;
-  titleChart: string;
 }>();
 
 </script>
@@ -16,8 +15,7 @@ const props = defineProps<{
   >
     <DxCommonSeriesSettings
         type="line"
-        argument-field="temp"
-    />
+        argument-field="temp"/>
     <DxSeries
         v-for="energy in props.seriesValue"
         :key="energy.value"

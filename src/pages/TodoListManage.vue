@@ -177,7 +177,7 @@ const changeTrend = async (value: string) => {
             </base-button>
           </div>
         </div>
-        <TrendLineComponent :data-source="sourceTrend" :series-value="usersSources"/>
+        <TrendLineComponent v-if="sourceTrend" :data-source="sourceTrend" :series-value="usersSources"/>
       </div>
     </div>
   </div>
