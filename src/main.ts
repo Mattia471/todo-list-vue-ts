@@ -6,6 +6,11 @@ import {DxDataGrid, DxPager, DxPaging, DxScrolling} from 'devextreme-vue/data-gr
 import {DxChart, DxPieChart} from "devextreme-vue";
 import {DxConnector, DxFormat, DxLabel, DxLegend, DxSeries} from "devextreme-vue/chart";
 import {DxColumn} from "devextreme-vue/gantt";
+import {DxCommonSeriesSettings} from "devextreme-vue/chart";
+import {DxMargin} from "devextreme-vue/chart";
+import {DxArgumentAxis} from "devextreme-vue/chart";
+import {DxGrid} from "devextreme-vue/chart";
+import {DxTitle} from "devextreme-vue/chart";
 
 createApp(App)
     .component('DxChart', DxChart)
@@ -20,4 +25,8 @@ createApp(App)
     .component('DxFormat', DxFormat)
     .component('DxLabel', DxLabel)
     .component('DxConnector', DxConnector)
+    .component('DxCommonSeriesSettings', DxCommonSeriesSettings)
+    .component('DxMargin', DxMargin)
+    .component('DxGrid', DxGrid)
+    .component('DxTitle', DxTitle)
     .mount('#app')

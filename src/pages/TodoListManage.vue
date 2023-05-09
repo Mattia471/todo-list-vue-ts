@@ -3,10 +3,10 @@ import BaseInput from "../components/BaseInput.vue";
 import BaseButton from "../components/BaseButton.vue";
 import {onMounted, ref} from "vue";
 import BaseCheckBox from "../components/BaseCheckBox.vue";
-import BarChartComponent from "../components/data-visualization/BarChartComponent.vue";
-import {dataChartSource, dataGridSource, dataGridColumns,dataSourceDoughnut,seriesSources,dataSourceLine} from "../sources/data.js";
+import service, {dataGridColumns, dataGridSource, dataSourceDoughnut, usersSources} from "../sources/data.js";
 import DataGridComponent from "../components/data-visualization/DataGridComponent.vue";
 import DoughnutChartComponent from "../components/data-visualization/DoughnutChartComponent.vue";
+import TrendLineComponent from "../components/data-visualization/TrendLineComponent.vue";
 
 interface Todo {
   id: number;
@@ -14,6 +14,9 @@ interface Todo {
   completed: boolean;
 }
 
+let sourceTrend = ref()
+const typeTrend = ['Hourly', 'Day', 'Weak', 'Month']
+const typeTrendSelected = ref(typeTrend[1]);
 const allTodos = ref([]);
 const newTodo = ref({id: 0, description: "", completed: false});
 const checkFilter = ref([]);
@@ -44,6 +47,7 @@ const loadTodos = () => {
 }
 onMounted(() => {
   loadTodos();
+  sourceTrend = service.getUsersInfo(typeTrendSelected.value)
 })
 const checkTodoExist = (value: string) => {
   const todo = getTodos().find((todo: any) => todo.description === value);
@@ -79,6 +83,10 @@ const filterTodos = (value: any) => {
   } else {
     loadTodos();
   }
+}
+const changeTrend = async (value: string) => {
+  typeTrendSelected.value = value;
+  sourceTrend = service.getUsersInfo(value)
 }
 </script>
 
@@ -154,8 +162,23 @@ const filterTodos = (value: any) => {
       </div>
     </div>
     <div class="grid grid-cols-6 gap-16 p-4">
-      <div class="col-span-3">
+      <div class="col-span-3 text-right">
+        <h1 class="text-xl text-blue-700 font-bold text-center mb-2">Users (Trend)</h1>
+        <div
+            class="inline-flex m-4 rounded-md shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            role="group">
+          <div class="col-span-1" v-for="type in typeTrend" :key="type">
+            <base-button :type="'solid'"
+                         :parent-class="(type==typeTrendSelected ? 'bg-gray-500 shadow-gray-500 shadow-xl' : '')"
+                         @click="changeTrend(type)">
+              <template #label>
+                <b>{{ type }}</b>
+              </template>
+            </base-button>
+          </div>
+        </div>
+        <TrendLineComponent :data-source="sourceTrend" :series-value="usersSources"/>
       </div>
     </div>
-    </div>
+  </div>
 </template>

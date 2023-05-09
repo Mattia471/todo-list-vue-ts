@@ -125,3 +125,46 @@ export const dataSourceDoughnut = [{
     field: 'New Visitor',
     val: 73.2,
 }];
+
+export const usersSources = [
+    {value: 'users', name: 'Users'}
+];
+
+let usersDataTrend = [];
+
+export default {
+    getUsersInfo(type) {
+        usersDataTrend = [];
+        let date = new Date();
+        let day = date.getDate() - 3;
+        let temp = '';
+        for (let i = 0; i < 6; i++) {
+            switch (type.toUpperCase()) {
+                case 'DAY':
+                    temp = `${day+i} ${this.calculateMonth()}`;
+                    break;
+                case 'MONTH':
+                    temp = this.calculateMonth(i);
+                    break;
+                case 'HOURLY':
+                    temp = `${date.getUTCHours() + i}:00`;
+                    break
+                case 'WEAK':
+                    //TODO: FIX WEAK
+                    date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
+                    temp = `${date.getDate()} ${this.calculateMonth()}`;
+                    break;
+            }
+            usersDataTrend.push({
+                temp: `${temp}`,
+                users: Math.floor(Math.random() * 1000)
+            })
+        }
+        return usersDataTrend;
+    },
+    calculateMonth(monthPlus) {
+        let date = new Date();
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return months[date.getMonth() + (monthPlus ? monthPlus : 0)]
+    }
+};
